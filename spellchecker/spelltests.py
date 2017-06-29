@@ -23,6 +23,8 @@ class TestSpellChecker(unittest.TestCase):
 		self.assertEqual(2,len(failed_words))
 		self.assertEqual("mistasdas",failed_words[0])
 		self.assertEqual("spelllleeeing",failed_words[1])
+		
+		self.assertEqual(0, len(self.spellChecker.check_document('spell.words')))
 
 if __name__ == "__main__":
 	unittest.main()
