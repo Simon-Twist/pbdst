@@ -14,14 +14,15 @@ class SpellChecker:
 		return word.strip(".").lower() in self.words
 
 	def check_words(self,sentence):
-		words_to_check = sentence.split(' ')
+		words_to_check = sentence.split(" ")
+		failed_words=[]
 		for word in words_to_check:
 			if not self.check_word(word):
-				print('Word is misspelt : ' + word)
-				return False
-		return True
+				print "Word is misspelt :",word
+				failed_words.append(word)
+		return failed_words
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 	spellcheck = SpellChecker()
 	words = spellcheck.load_words("spell.words")
 	print spellcheck.check_words("zygotic")
