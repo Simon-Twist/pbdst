@@ -86,7 +86,16 @@ class RentalCo(object):
 				print "\n   Sorry nothing to rent, please try again."
 			else:
 				answer = raw_input("     What type would you like p/d/h/e? ")
-				amount = int(raw_input("              How many would you like? "))
+
+				valid=False
+				while valid==False:
+					try:
+						amount = int(raw_input("              How many would you like? "))
+						valid=True
+					except:
+						print "              Please enter an integer."
+
+
 				if answer == "p":
 					self.rent(self.petrol_cars, renter, amount)
 				elif answer == "d":
@@ -99,7 +108,15 @@ class RentalCo(object):
 			answer = raw_input("   Would you like to return a car y/n? ")
 			if answer == "y":
 				type = raw_input("  What type are you returning p/d/h/e? ")
-				amount = int(raw_input("    How many would you like to return? "))
+
+				valid=False
+				while valid==False:
+					try:
+						amount = int(raw_input("    How many would you like to return? "))
+						valid=True
+					except:
+						print "              Please enter an integer."
+
 				if type == "p":
 					self.Return(renter, type, self.petrol_cars, amount)
 				elif type == "d":
@@ -125,13 +142,18 @@ class RentalCo(object):
 
 		if amount<=len(car_list)-list[index]:
 			for i in range(amount):
-				incar=raw_input("          Which car is being returned? ")
-				for car in car_list:
-					if car.reg==incar:
-						if returner==car.renter:
-							car.renter=""
-						else:
-							print "\n         ",returner,"did not rent this car."
+				found=False
+				while found==False:	
+					incar=raw_input("          Which car is being returned? ")
+					for car in car_list:
+						if car.reg==incar:
+							if returner==car.renter:
+								car.renter=""
+							else:
+								print "\n         ",returner,"did not rent this car."
+							found=True
+					if found==False:
+						print "                     ",incar,"not found."
 		else:
 			print "\n       Cannot return more than rented."
 
@@ -155,6 +177,14 @@ def main():
 	proceed = "y"
 	while proceed == "y":
 		DBSCarRental.process_rental()
-		proceed = raw_input("\n                         Continue y/n? ")
-
-main()
+		valid=False
+		while valid==False:
+			proceed = raw_input("\n                         Continue y/n? ")
+			if proceed=="y" or proceed=="n":
+				valid=True
+			else:
+				print '                 Please choose y or n.'
+try:
+	main()
+except:
+	print "\n             The programme has exited."

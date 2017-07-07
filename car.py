@@ -1,7 +1,10 @@
-# Define a class for my car
+#Simon Twist
+#10369980
+#7 July 2017
 
+#Define Car
 class Car(object):
-# implement the car object.
+#Implement the car object.
 	
 	def __init__(self):
 		self.__colour = ""
@@ -37,7 +40,7 @@ class Car(object):
 		self.__mileage = self.__mileage + distance
 		return self.__mileage
 
-#1/4 Petrol
+#1 Petrol inherits from Car
 class PetrolCar(Car):
 
 	def __init__(self):
@@ -63,7 +66,7 @@ class PetrolCar(Car):
 	def setNumberCylinders(self, value):
 		self.__numberCylinders = value
 
-#2/4 Diesel
+#2 Diesel inherits from Car
 class DieselCar(Car):
 
 	def __init__(self):
@@ -74,19 +77,13 @@ class DieselCar(Car):
 	def getType(self):
 		return self.__type
 		
-	def getAvail(self):
-		return self.__available
-		
-	def setAvail(self,TrueFalse):
-		self.__available = TrueFalse
-		
 	def getNumberCylinders(self):
 		return self.__numberCylinders
 
 	def setNumberCylinders(self, value):
 		self.__numberCylinders = value
 
-#3/4 Electric
+#3 Electric inherits from Car
 class ElectricCar(Car):
 	
 	def __init__(self):
@@ -96,12 +93,6 @@ class ElectricCar(Car):
 
 	def getType(self):
 		return self.__type
-		
-	def getAvail(self):
-		return self.__available
-		
-	def setAvail(self,TrueFalse):
-		self.__available = TrueFalse
 
 	def getNumberFuelCells(self):
 		return self.__numberFuelCells
@@ -109,7 +100,7 @@ class ElectricCar(Car):
 	def setNumberFuelCells(self, value):
 		self.__numberFuelCells = value
 
-#4/4 Hybrid
+#4 Hybrid inherits from PetrolCar
 class HybridCar(PetrolCar):
 	
 	def __init__(self):
