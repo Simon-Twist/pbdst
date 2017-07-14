@@ -91,7 +91,7 @@ def divide(a,b):
 
 #6 a to the power of b
 def expo(a,b):
-	if not (a==0 and b<1):
+	if not (a==0 and b<=0):
 		return a**b
 	return "Error"
 
