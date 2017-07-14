@@ -193,13 +193,17 @@ def maximum(a):
 
 #14 prime numbers
 def prime(a):
-	for x in range(a):
-		if x!=0 and x!=1 and (a/float(x))%1==0:
+	if a<2:
+		return False
+	for x in range(2,a):
+		if a/x<x:
+			break
+		elif (a/float(x))%1==0:
 			return False
 	return True
 	
-def primelist(a):
-	return filter(prime, a)
+def primelist(inlist):
+	return filter(prime,inlist)
 
 def main():
 	#valid input
