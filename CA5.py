@@ -64,33 +64,39 @@ for c in commits:
 		authors.append(c.author)
 
 #Count the commits by each author
-per_author=[]
-for i in range(len(authors)):
-	per_author.append(0)
-	for c in commits:
-		if c.author==authors[i]:
-			per_author[i]+=1
-		
-#sort
+def perauthor(commits,authors):
+	per_author=[]
+	for i in range(len(authors)):
+		per_author.append(0)
+		for c in commits:
+			if c.author==authors[i]:
+				per_author[i]+=1
+			
+	#sort
+	per_author_dec=sorted(per_author)
+	per_author_dec.reverse()
+	
+	return per_author,per_author_dec
+
+perauthorlists=perauthor(commits,authors)
 authors_dec=[]
-per_author_dec=sorted(per_author)
-per_author_dec.reverse()
+
 for i in range(len(authors)):
 	for k in range(len(authors)):
-		if per_author_dec[i]==per_author[k] and (i==0 or authors_dec[i-1]!=authors[k]):
+		if perauthorlists[1][i]==perauthorlists[0][k] and (i==0 or authors_dec[i-1]!=authors[k]):
 			authors_dec.append(authors[k])
 			break
 
 #display
 print			
 for i in range(len(authors)):
-		print "   %47s %d" % (authors_dec[i],per_author_dec[i])
+		print "   %47s %d" % (authors_dec[i],perauthorlists[1][i])
 
 #output to CSV
 authorsfile=open("authors.csv","w")
 authorsfile.write("Author,Commits\n")
 for i in range(len(authors)):
-	authorsfile.write(authors_dec[i]+","+str(per_author_dec[i])+"\n")
+	authorsfile.write(authors_dec[i]+","+str(perauthorlists[1][i])+"\n")
 authorsfile.close()
 
 #day of the week
@@ -98,25 +104,27 @@ authorsfile.close()
 days=["Mon","Tue","Wed","Thu","Fri"]
 
 #count the commits per day
-per_day=[]
-for i in range(len(days)):
-	per_day.append(0)
-	for c in commits:
-		date=c.date.split("(")
-		day=date[1][0:3]
-		if day==days[i]:
-			per_day[i]+=1
+def perday(commits,days):
+	per_day=[]
+	for i in range(len(days)):
+		per_day.append(0)
+		for c in commits:
+			date=c.date.split("(")
+			day=date[1][0:3]
+			if day==days[i]:
+				per_day[i]+=1
+	return per_day
 	
 #display
 print			
 for i in range(len(days)):
-		print "   %47s %d" % (days[i],per_day[i])
+		print "   %47s %d" % (days[i],perday(commits,days)[i])
 
 #output to CSV
 daysfile=open("days.csv","w")
 daysfile.write("Day,Commits\n")
 for i in range(len(days)):
-	daysfile.write(days[i]+","+str(per_day[i])+"\n")
+	daysfile.write(days[i]+","+str(perday(commits,days)[i])+"\n")
 daysfile.close()
 
 #time of day
@@ -124,14 +132,17 @@ daysfile.close()
 times=["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"]
 
 #count the commits at each time of day
-per_time=[]
-for i in range(len(times)):
-	per_time.append(0)
-	for c in commits:
-		time=c.date[11:13]
-		if time==times[i]:
-			per_time[i]+=1
+def pertime(commits,times):
+	per_time=[]
+	for i in range(len(times)):
+		per_time.append(0)
+		for c in commits:
+			time=c.date[11:13]
+			if time==times[i]:
+				per_time[i]+=1
+	return per_time
 
+per_time=pertime(commits,times)
 #display
 print			
 for i in range(len(times)):
